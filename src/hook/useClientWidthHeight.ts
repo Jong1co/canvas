@@ -1,7 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-const useClientWidthHeight = () => {
+const useClientWidthHeight = (
+  resizeFunction?: (width: number, height: number) => void
+) => {
   const [boxSize, setBoxSize] = useState({
     width: 0,
     height: 0,
@@ -10,6 +12,7 @@ const useClientWidthHeight = () => {
   useEffect(() => {
     const resize = () => {
       setBoxSize({ width: window.innerWidth, height: window.innerHeight });
+      resizeFunction && resizeFunction(window.innerWidth, window.innerHeight);
     };
 
     resize();
